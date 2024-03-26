@@ -4,6 +4,9 @@
 	let emailRegex =
 		/^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/;
 
+	let formContainer;
+	let successContainer;
+
 	function submitForm() {
 		if (emailRegex.test(email) === false || email === '') {
 			alert = 'Valid email required';
@@ -11,19 +14,19 @@
 			return;
 		}
 		document.querySelector('input').classList.remove('invalid');
-		document.querySelector('.form-container').style.display = 'none';
-		document.querySelector('.success-container').style.display = 'grid';
+		formContainer.style.display = 'none';
+		successContainer.style.display = 'grid';
 		alert = '';
 	}
 	function dismissMessage() {
 		email = '';
-		document.querySelector('.success-container').style.display = 'none';
-		document.querySelector('.form-container').style.display = 'flex';
+		successContainer.style.display = 'none';
+		formContainer.style.display = 'flex';
 	}
 </script>
 
 <main>
-	<div class="form-container">
+	<div class="form-container" bind:this={formContainer}>
 		<div class="content">
 			<h1>Stay updated!</h1>
 			<p>Join 60,000+ product managers receiving monthly updates on:</p>
@@ -60,7 +63,7 @@
 			/>
 		</div>
 	</div>
-	<div class="success-container">
+	<div class="success-container" bind:this={successContainer}>
 		<div>
 			<img src="icon-success.svg" alt="" width="47" />
 			<h1>Thanks for subscribing!</h1>
